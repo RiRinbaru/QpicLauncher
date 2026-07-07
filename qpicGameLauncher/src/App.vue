@@ -1,10 +1,11 @@
 <script setup lang="ts">
 import { ref } from "vue";
-// 分割した部品（コンポーネント）を読み込む
+
 import LibraryView from "./components/LibraryView.vue";
+import DownloadView from "./components/DownloadView.vue";
 import SettingsView from "./components/SettingsView.vue";
 
-const currentTab = ref<"library" | "settings">("library");
+const currentTab = ref<"library" | "download" | "settings">("library");
 </script>
 
 <template>
@@ -13,6 +14,9 @@ const currentTab = ref<"library" | "settings">("library");
       <button :class="{ active: currentTab === 'library' }" @click="currentTab = 'library'">
         ライブラリ
       </button>
+      <button :class="{ active: currentTab === 'download' }" @click="currentTab = 'download'">
+        ダウンロード
+      </button>
       <button :class="{ active: currentTab === 'settings' }" @click="currentTab = 'settings'">
         設定
       </button>
@@ -20,6 +24,7 @@ const currentTab = ref<"library" | "settings">("library");
 
     <main class="content-area">
       <LibraryView v-if="currentTab === 'library'" />
+      <DownloadView v-if="currentTab === 'download'" />
       <SettingsView v-if="currentTab === 'settings'" />
     </main>
   </div>
